@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\RepositoryLib.dll.config
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\RepositoryLib.dll
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\RepositoryLib.pdb
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\EntityFramework.dll
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\EntityFramework.xml
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\obj\Debug\RepositoryLib.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\obj\Debug\RepositoryLib.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\obj\Debug\RepositoryLib.csproj.CopyComplete
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\obj\Debug\RepositoryLib.dll
+C:\Users\User\Desktop\Te\TestSystem\RepositoryLib\obj\Debug\RepositoryLib.pdb

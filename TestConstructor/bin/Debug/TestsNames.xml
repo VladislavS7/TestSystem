@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>test1.xml</string>
+  <string>C:\Users\User\Desktop\Tests\NET</string>
+  <string>C:\Users\User\Desktop\Tests\Третій Тест</string>
+  <string>C:\Users\User\Desktop\Tests\NEWTEST</string>
+  <string>C:\Users\User\Desktop\Tests\LastTest</string>
+</ArrayOfString>

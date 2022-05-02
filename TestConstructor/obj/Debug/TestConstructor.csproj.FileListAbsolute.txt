@@ -1,0 +1,16 @@
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\bin\Debug\TestConstructor.exe.config
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\bin\Debug\TestConstructor.exe
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\bin\Debug\TestConstructor.pdb
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\bin\Debug\TestSystemLibrary.dll
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\bin\Debug\TestSystemLibrary.pdb
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.Form1.resources
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.Properties.Resources.resources
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.csproj.GenerateResource.cache
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.csproj.CopyComplete
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.exe
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.pdb
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.AddQuestion.resources
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.AddAnswer.resources
+C:\Users\User\Desktop\TestSystem\TestSystem\TestConstructor\obj\Debug\TestConstructor.ExistingTests.resources

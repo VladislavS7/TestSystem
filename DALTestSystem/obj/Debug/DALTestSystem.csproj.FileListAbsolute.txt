@@ -1,0 +1,14 @@
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\DALTestSystem.dll.config
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\DALTestSystem.dll
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\DALTestSystem.pdb
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\EntityFramework.dll
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\EntityFramework.xml
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\obj\Debug\DALTestSystem.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\obj\Debug\DALTestSystem.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\obj\Debug\DALTestSystem.csproj.CopyComplete
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\obj\Debug\DALTestSystem.dll
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\obj\Debug\DALTestSystem.pdb
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\TestSystemLibrary.dll
+C:\Users\User\Desktop\Te\TestSystem\DALTestSystem\bin\Debug\TestSystemLibrary.pdb
