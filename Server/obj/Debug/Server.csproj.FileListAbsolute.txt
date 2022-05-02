@@ -30,3 +30,4 @@ C:\Users\User\Desktop\Te\TestSystem\Server\bin\Debug\System.Security.AccessContr
 C:\Users\User\Desktop\Te\TestSystem\Server\bin\Debug\System.Security.Permissions.xml
 C:\Users\User\Desktop\Te\TestSystem\Server\bin\Debug\System.Security.Principal.Windows.xml
 C:\Users\User\Desktop\Te\TestSystem\Server\obj\Debug\Server.SignIn.resources
+C:\Users\User\Desktop\Te\TestSystem\Server\obj\Debug\Server.AddUser.resources
