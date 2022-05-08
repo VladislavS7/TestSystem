@@ -31,3 +31,4 @@ C:\Users\User\Desktop\Te\TestSystem\Server\bin\Debug\System.Security.Permissions
 C:\Users\User\Desktop\Te\TestSystem\Server\bin\Debug\System.Security.Principal.Windows.xml
 C:\Users\User\Desktop\Te\TestSystem\Server\obj\Debug\Server.SignIn.resources
 C:\Users\User\Desktop\Te\TestSystem\Server\obj\Debug\Server.AddUser.resources
+C:\Users\User\Desktop\Te\TestSystem\Server\obj\Debug\Server.AddGroup.resources

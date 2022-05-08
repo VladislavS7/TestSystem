@@ -103,31 +103,51 @@ namespace Server
                 MessageBox.Show("Incorrect data", "", MessageBoxButtons.OK);
                 return;
             }
-
-            user.FirstName = textBox1.Text;
-            user.LastName = textBox2.Text;
-            user.Login = textBox3.Text;
-            user.Password = textBox4.Text;
-            user.isAdmin = checkBox1.Checked;
+            
             List<Group> groups = new List<Group>();
-            user.Groups.Clear();
-            if (checkedListBox1.CheckedItems.Count > 0)//Заповнення груп користувача (якщо вибрані)
-            {
-                foreach (string item in checkedListBox1.CheckedItems)
-                {
-                    Group group = repositoryGroup.FindAll(x => x.Name == item).FirstOrDefault();
-                    groups.Add(group);
-                }
-            }
-            user.Groups = groups;
             if (!isEdit)
             {
+
+                user.FirstName = textBox1.Text;
+                user.LastName = textBox2.Text;
+                user.Login = textBox3.Text;
+                user.Password = textBox4.Text;
+                user.isAdmin = checkBox1.Checked;
+                if (checkedListBox1.CheckedItems.Count > 0)//Заповнення груп користувача (якщо вибрані)
+                {
+                    foreach (string item in checkedListBox1.CheckedItems)
+                    {
+                        Group group = repositoryGroup.FindAll(x => x.Name == item).FirstOrDefault();
+                        groups.Add(group);
+                    }
+                }
+                user.Groups = groups;
                 repositoryUser.Add(user);
                 work.SaveChanges();
             }
             else
             {
-                repositoryUser.Update(user);
+                User newUser = repositoryUser.FindById(user.Id);
+                newUser.FirstName = textBox1.Text;
+                newUser.LastName = textBox2.Text;
+                newUser.Login = textBox3.Text;
+                newUser.Password = textBox4.Text;
+                newUser.isAdmin = checkBox1.Checked;
+                List<string> names = new List<string>();
+                foreach (var item in checkedListBox1.CheckedItems)//Всі вибрані групи
+                {
+                    names.Add(item.ToString());
+                }
+
+                foreach (var item in names)
+                {
+                    Group group = new Group();
+                    group = repositoryGroup.FindAll(x => x.Name == item).FirstOrDefault();
+                    groups.Add(group);
+                }
+
+                newUser.Groups.Clear();
+                newUser.Groups = groups;
                 work.SaveChanges();
             }
             work.Dispose();
