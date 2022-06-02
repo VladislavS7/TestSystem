@@ -6,10 +6,12 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestSystemLibrary;
 
 namespace Server
 {
@@ -19,12 +21,13 @@ namespace Server
         GenericUnitOfWork work;
         IGenericRepository<User> repositoryUser;
         IGenericRepository<Group> repositoryGroup;
+        IGenericRepository<TestDB> repositoryTestDB;
+        IGenericRepository<TestUsers> repositoryTestUsers;
+        Test test;
         public Form1()
         {
             InitializeComponent();
             work = new GenericUnitOfWork(new TestUserContext(conStr));
-            //repositoryUser = work.Repository<User>();
-            //repositoryGroup = work.Repository<Group>();
         }
 
         //Перевірка входу на сервер
@@ -32,6 +35,8 @@ namespace Server
         {
             work = new GenericUnitOfWork(new TestUserContext(conStr));
             repositoryUser = work.Repository<User>();
+            repositoryTestUsers = work.Repository<TestUsers>();
+            List<TestUsers> testUsers = repositoryTestUsers.GetAll().ToList();
             StringBuilder log = new StringBuilder();
             StringBuilder pass = new StringBuilder();
             SignIn signIn = new SignIn(log, pass);
@@ -42,7 +47,18 @@ namespace Server
                 string ps = pass.ToString();
                 repositoryUser = work.Repository<User>();
                 User user = repositoryUser.FindAll(u => u.Login == lg && u.Password == ps).FirstOrDefault();
-                if(user == null || user.isAdmin == false)
+                repositoryTestDB = work.Repository<TestDB>();
+                List<TestDB> testDBs = repositoryTestDB.GetAll().ToList();
+                foreach (TestDB test in testDBs)
+                {
+                    dataGridView5.Rows.Add(test.Id, test.Author, test.Title, test.Description, test.CountOfQuestions, test.MinimumPassingPercent);
+                }
+                foreach (TestUsers item in testUsers)
+                {
+                    dataGridView6.Rows.Add(item.Id, item.TestId, item.UserId, item.DateTime);
+                }
+                work.Dispose();
+                if (user == null || user.isAdmin == false)
                 {
                     this.Close();
                 }
@@ -60,12 +76,32 @@ namespace Server
             work = new GenericUnitOfWork(new TestUserContext(conStr));
             repositoryUser = work.Repository<User>();
             repositoryGroup = work.Repository<Group>();
+            
             List<User> users = new List<User>();
             List<Group> groups = new List<Group>();
             switch (tabControl1.SelectedTab.Text)
             {
                 case "Tests":
-
+                    if (dataGridView5.Rows.Count > 0)
+                    {
+                        dataGridView5.Rows.Clear();
+                    }
+                    if(dataGridView6.Rows.Count > 0)
+                    {
+                        dataGridView6.Rows.Clear();
+                    }
+                    repositoryTestDB = work.Repository<TestDB>();
+                    repositoryTestUsers = work.Repository<TestUsers>();
+                    List<TestUsers> testUsers = repositoryTestUsers.GetAll().ToList();
+                    List<TestDB> testDBs = repositoryTestDB.GetAll().ToList();
+                    foreach (TestDB test in testDBs)
+                    {
+                        dataGridView5.Rows.Add(test.Id, test.Author, test.Title, test.Description, test.CountOfQuestions, test.MinimumPassingPercent);
+                    }
+                    foreach (TestUsers item in testUsers)
+                    {
+                        dataGridView6.Rows.Add(item.Id, item.TestId, item.UserId, item.DateTime);
+                    }
                     break;
                 case "Users":
                     if (dataGridView1.Rows.Count > 0)
@@ -73,6 +109,7 @@ namespace Server
                         dataGridView1.Rows.Clear();
                         dataGridView2.Rows.Clear();
                     }
+                        groups.Clear();
                         repositoryUser = work.Repository<User>();
                         users = repositoryUser.GetAll().ToList();
                         foreach (User item in users)
@@ -85,9 +122,9 @@ namespace Server
                         {
                             dataGridView2.Rows.Add(item.Id, item.Name);
                         }
-                    
                     break;
                 case "Groups":
+                    groups.Clear();
                     if (dataGridView3.Rows.Count > 0)
                     {
                         dataGridView3.Rows.Clear();
@@ -112,6 +149,7 @@ namespace Server
                     
                     break;
                 case "Results":
+                    
 
                     break;
                 case "Connections":
@@ -313,6 +351,130 @@ namespace Server
                     work.Dispose();
                 }
             }
+        }
+
+        //Завантажити тест
+        private void button7_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            DialogResult result = openFile.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                test = new Test();
+                string path = openFile.FileName;
+                Serializer serializer = new Serializer();
+                string xmlDoc = File.ReadAllText(path);
+                test = serializer.Deserialize<Test>(xmlDoc);
+                textBox2.Text = test.Author;
+                textBox3.Text = test.Title;
+                textBox4.Text = test.Description;
+                textBox1.Text = test.CountOfQuestions.ToString();
+                textBox5.Text = test.MinimumPassingPercent.ToString();
+                button8.Enabled = true;
+            }
+        }
+
+        //Зберегти тест
+        private void button8_Click(object sender, EventArgs e)
+        {
+            button8.Enabled = false;
+            work = new GenericUnitOfWork(new TestUserContext(conStr));
+            repositoryTestDB = work.Repository<TestDB>();
+            TestDB testDB = new TestDB();
+            testDB.Author = test.Author;
+            testDB.Title = test.Title;
+            testDB.Description = test.Description;
+            testDB.CountOfQuestions = test.CountOfQuestions;
+            testDB.MinimumPassingPercent = test.MinimumPassingPercent;
+            testDB.Img = test.Img;
+            List<QuestionDB> questionDBs = new List<QuestionDB>();
+            foreach (Question question in test.questions)
+            {
+                QuestionDB questionDB = new QuestionDB();
+                questionDB.Text = question.Text;
+                questionDB.Points = question.Points;
+                questionDB.Img = question.Img;
+                questionDB.CountOfAnswers = question.CountOfAnswers;
+                questionDB.TestDB = testDB;
+                List<AnswerDB> answerDBs = new List<AnswerDB>();
+                foreach (Answer answer in question.Answers)
+                {
+                    AnswerDB answerDB = new AnswerDB();
+                    answerDB.Text = answer.Text;
+                    answerDB.IsTrue = answer.IsTrue;
+                    answerDB.QuestionDB = questionDB;
+                    answerDBs.Add(answerDB);
+                }
+                questionDB.AnswerDBs = answerDBs;
+                questionDBs.Add(questionDB);
+            }
+            testDB.QuestionDBs = questionDBs;
+            repositoryTestDB.Add(testDB);
+            work.SaveChanges();
+
+            List<TestDB> testDBs = repositoryTestDB.GetAll().ToList();
+            testDB = testDBs.Last<TestDB>();
+            dataGridView5.Rows.Add(testDB.Id, testDB.Author, testDB.Title, testDB.Description, testDB.CountOfQuestions, testDB.MinimumPassingPercent);
+            work.Dispose();
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+        }
+
+        //Призначити тест
+        private void button9_Click(object sender, EventArgs e)
+        {
+            AssignTest assignTest = new AssignTest(dataGridView6);
+            DialogResult result = assignTest.ShowDialog();
+        }
+
+        //Результати всіх користувачів
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox2.Enabled = false;
+            work = new GenericUnitOfWork(new TestUserContext(conStr));
+            repositoryTestUsers = work.Repository<TestUsers>();
+            List<TestUsers> testUsers = repositoryTestUsers.FindAll(x => x.ResultPoints > 0).ToList();
+            dataGridView7.Rows.Clear();
+            foreach (TestUsers item in testUsers)
+            {
+                dataGridView7.Rows.Add(item.Id, item.TestId, item.UserId, item.DateTime, item.ResultPoints, item.isPassed);
+            }
+            work.Dispose();
+        }
+
+        //Результати групи
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox2.Enabled = true;
+            dataGridView7.Rows.Clear();
+        }
+
+        //Вибрати групу
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = comboBox2.SelectedItem.ToString();
+            int i = id.IndexOf(']');
+            id = id.Remove(i);
+            id = id.Remove(0, 1);
+            work = new GenericUnitOfWork(new TestUserContext(conStr));
+            repositoryGroup = work.Repository<Group>();
+            Group group = repositoryGroup.FindById(id);
+            List<int> usersIds = new List<int>();
+            foreach (User item in group.Users)
+            {
+                usersIds.Add(item.Id);
+            }
+            repositoryTestUsers = work.Repository<TestUsers>();
+            List<TestUsers> testUsers = repositoryTestUsers.FindAll(x => x.ResultPoints > 0 && usersIds.Contains(x.UserId)).ToList();
+            foreach (TestUsers item in testUsers)
+            {
+                dataGridView7.Rows.Add(item.Id, item.TestId, item.UserId, item.DateTime, item.ResultPoints, item.isPassed);
+            }
+            work.Dispose();
         }
     }
 }
